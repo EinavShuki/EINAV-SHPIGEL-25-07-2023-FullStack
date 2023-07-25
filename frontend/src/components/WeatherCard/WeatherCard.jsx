@@ -1,6 +1,5 @@
 import React from 'react';
 import './WeatherCard.css';
-import Card from '../Card/Card';
 import _ from 'lodash';
 import { TbSunglasses } from 'react-icons/tb';
 import { BsFillCloudRainHeavyFill } from 'react-icons/bs';
@@ -13,7 +12,7 @@ function WeatherCard({ weather }) {
         const condition = day.day.condition;
         const formattedDate = new Date(day.date).toDateString();
         return (
-          <Card key={index}>
+          <div key={index}>
             <h5 className='date'>{formattedDate}</h5>
             <div className='conditon'>{condition.text}</div>
             <img
@@ -44,7 +43,7 @@ function WeatherCard({ weather }) {
                 <span> {day.day.avghumidity}%</span>
               </div>
             </div>
-          </Card>
+          </div>
         );
       })}
     </div>
