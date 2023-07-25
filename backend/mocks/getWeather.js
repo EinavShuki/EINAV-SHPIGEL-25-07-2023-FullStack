@@ -1,4 +1,4 @@
-export default weather = [
+const weather = [
   {
     LocalObservationDateTime: '2023-07-25T09:37:00+01:00',
     EpochTime: 1690274220,
@@ -24,3 +24,4 @@ export default weather = [
     Link: 'http://www.accuweather.com/en/gb/london/ec4a-2/current-weather/328328?lang=en-us',
   },
 ];
+export default weather;
