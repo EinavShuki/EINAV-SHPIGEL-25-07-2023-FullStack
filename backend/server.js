@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
 import cityWeatherRoutes from './routes/cityWeatherRoutes.js';
+import locationsRouter from './routes/locationsRoutes.js';
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/api/cityWeather', cityWeatherRoutes);
+app.use('/api/locations', locationsRouter);
 
 app.get('/', (req, res) => {
   res.send('API is running....');

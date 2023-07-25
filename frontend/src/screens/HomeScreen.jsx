@@ -9,13 +9,7 @@ function HomeScreen() {
   console.log({ data });
 
   return (
-    <div
-      style={{
-        width: '100vw',
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-      }}>
+    <div className='home_div'>
       <Search />
       {data && <WeatherCard />}
     </div>
