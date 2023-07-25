@@ -9,9 +9,8 @@ connectDB();
 
 const importData = async () => {
   try {
-    const trying = await CityWeather.insertMany(weather);
+    await CityWeather.insertMany(weather);
     console.log('Data imported!');
-    console.log({ trying });
     process.exit();
   } catch (error) {
     console.error(`${error}`);

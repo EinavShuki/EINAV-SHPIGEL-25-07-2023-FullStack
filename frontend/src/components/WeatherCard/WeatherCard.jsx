@@ -3,6 +3,9 @@ import './WeatherCard.css';
 import _ from 'lodash';
 import useFetch from '../../hooks/useFetch';
 import Loader from '../Loader/Loader';
+import ErrorCard from '../ErrorCard/ErrorCard';
+
+const ErrorMsg = 'Something went wrong';
 
 function WeatherCard({ currentLocation }) {
   console.log({ currentLocation });
@@ -10,14 +13,15 @@ function WeatherCard({ currentLocation }) {
   const { data, isLoading, isError } = useFetch(
     `/api/cityWeather/${currentLocation.value}`
   );
-  console.log({ data });
   const formattedDate =
     data && new Date(data.LocalObservationDateTime).toDateString();
   const currentTemp = _.get(data, 'Temperature.Metric.Value', '');
 
   return (
     <div className='weather_area'>
-      {isLoading ? (
+      {isError ? (
+        <ErrorCard message={ErrorMsg} />
+      ) : isLoading ? (
         <Loader />
       ) : (
         data && (
