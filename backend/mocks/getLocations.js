@@ -1,4 +1,4 @@
-export default locations = [
+const locations = [
   {
     Version: 1,
     Key: '328328',
@@ -150,3 +150,5 @@ export default locations = [
     },
   },
 ];
+
+export default locations;

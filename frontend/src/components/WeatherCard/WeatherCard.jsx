@@ -1,51 +1,44 @@
 import React from 'react';
 import './WeatherCard.css';
 import _ from 'lodash';
-import { TbSunglasses } from 'react-icons/tb';
-import { BsFillCloudRainHeavyFill } from 'react-icons/bs';
-import { WiHumidity } from 'react-icons/wi';
+import useFetch from '../../hooks/useFetch';
 
-function WeatherCard({ weather }) {
+function WeatherCard({ currentLocation }) {
+  console.log({ currentLocation });
+
+  const { data, isLoading, isError } = useFetch(
+    `/api/cityWeather/${currentLocation.value}`
+  );
+  console.log({ data });
+  const formattedDate =
+    data && new Date(data.LocalObservationDateTime).toDateString();
+  const currentTemp = _.get(data, 'Temperature.Metric.Value', '');
+
   return (
-    <div style={{ marginTop: '100px', display: 'flex' }}>
-      {_.map(weather.forecast.forecastday, (day, index) => {
-        const condition = day.day.condition;
-        const formattedDate = new Date(day.date).toDateString();
-        return (
-          <div key={index}>
+    <div className='weather_area'>
+      {data && (
+        <div>
+          <div className='weather_top_line'>
+            <h3
+              style={{
+                borderBottom: 'solid 1px  hsl(0, 0%, 40%)',
+                paddingBottom: '5px',
+              }}>
+              Current Weather
+            </h3>
             <h5 className='date'>{formattedDate}</h5>
-            <div className='conditon'>{condition.text}</div>
-            <img
-              style={{ width: '7vw' }}
-              src={require(`../../weather_icons${condition.icon.slice(-12)}`)}
-              alt={condition.text}
-            />
-            <div className='temp'>
-              {day.day.mintemp_c}&deg;- {day.day.maxtemp_c}&deg;
-            </div>
-            <div className='more_info'>
-              <div
-                style={{
-                  borderRight: 'solid 1px hsl(0, 0%, 40%)',
-                }}>
-                <TbSunglasses />
-                <span> {day.day.uv}%</span>
-              </div>
-              <div
-                style={{
-                  borderRight: 'solid 1px hsl(0, 0%, 40%)',
-                }}>
-                <BsFillCloudRainHeavyFill />
-                <span> {day.day.daily_chance_of_rain}%</span>
-              </div>
-              <div>
-                <WiHumidity />
-                <span> {day.day.avghumidity}%</span>
-              </div>
-            </div>
           </div>
-        );
-      })}
+          <div className='weather_mid_line'>
+            <img
+              style={{ width: '15vw' }}
+              src={require(`../../images/${data.WeatherIcon}.svg`)}
+              alt={data.WeatherText}
+            />
+            <div className='conditon'>{data.WeatherText}</div>
+          </div>
+          <div className='temp'>{currentTemp}&deg;</div>
+        </div>
+      )}
     </div>
   );
 }

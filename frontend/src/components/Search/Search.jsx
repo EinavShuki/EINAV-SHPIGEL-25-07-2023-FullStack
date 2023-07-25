@@ -7,15 +7,21 @@ import { getOptions } from '../../utils';
 
 const DELAY = 1000;
 
-const Search = () => {
-  const [inputValue, setInputValue] = useState('kk');
+const Search = ({ currentLocation, setCurrentLocation }) => {
+  const [inputValue, setInputValue] = useState('');
   const [options, setOptions] = useState([]);
-  const [currentLocation, setCurrentLocation] = useState('');
   const debouncedValue = useDebounce(inputValue, DELAY); //costume hook
 
+  console.log({ currentLocation });
+
   const changeLocation = (e) => {
-    setCurrentLocation(e.Key);
+    setCurrentLocation(e);
   };
+
+  useEffect(() => {
+    //fetching locations
+    fetchLocations(debouncedValue);
+  }, [debouncedValue]);
 
   const fetchLocations = async (debouncedValue) => {
     if (_.size(debouncedValue) > 1) {
@@ -28,14 +34,9 @@ const Search = () => {
     }
   };
 
-  useEffect(() => {
-    //fetching locations
-    fetchLocations(debouncedValue);
-  }, [debouncedValue]);
-
   return (
     <Select
-      value={currentLocation}
+      value={currentLocation || ''}
       isMulti={false}
       name='cities'
       className='basic-select'

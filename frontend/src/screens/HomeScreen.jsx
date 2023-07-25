@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
-import useFetch from '../hooks/useFetch';
+import React, { useEffect, useState } from 'react';
 import Search from '../components/Search/Search';
 import WeatherCard from '../components/WeatherCard/WeatherCard';
+import _ from 'lodash';
 
 function HomeScreen() {
-  const [cityKey, setCityKey] = useState('');
-  const { data, isLoading, isError } = useFetch(`/api/cityWeather/${cityKey}`);
-  console.log({ data });
+  const [currentLocation, setCurrentLocation] = useState('');
 
   return (
     <div className='home_div'>
-      <Search />
-      {data && <WeatherCard />}
+      <Search
+        currentLocation={currentLocation}
+        setCurrentLocation={setCurrentLocation}
+      />
+      {currentLocation && !_.isEmpty(currentLocation) && (
+        <WeatherCard currentLocation={currentLocation} />
+      )}
     </div>
   );
 }
