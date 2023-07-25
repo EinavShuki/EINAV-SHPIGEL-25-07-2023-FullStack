@@ -1,5 +1,6 @@
 const weather = [
   {
+    cityKey: '328328',
     LocalObservationDateTime: '2023-07-25T09:37:00+01:00',
     EpochTime: 1690274220,
     WeatherText: 'Mostly cloudy',

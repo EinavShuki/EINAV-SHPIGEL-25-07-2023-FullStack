@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const cityWeatherSchema = mongoose.Schema(
   {
+    cityKey: { type: String, require: true },
     LocalObservationDateTime: { type: Date },
     EpochTime: { type: Date },
     WeatherText: { type: String, default: '' },
