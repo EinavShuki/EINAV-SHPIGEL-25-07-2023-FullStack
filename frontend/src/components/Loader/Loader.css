@@ -1,0 +1,15 @@
+.sun_icon {
+  animation: round-sun 3s infinite linear;
+  position: absolute;
+  top: 150px;
+  left: 37%;
+}
+
+@keyframes round-sun {
+  0% {
+    transform: rotateZ(0deg) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: rotateZ(720deg) translate3d(0, 0, 0);
+  }
+}
