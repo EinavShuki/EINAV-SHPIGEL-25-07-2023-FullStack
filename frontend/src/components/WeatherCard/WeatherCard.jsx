@@ -6,10 +6,12 @@ import Loader from '../Loader/Loader';
 import ErrorCard from '../ErrorCard/ErrorCard';
 import { AiFillHeart } from 'react-icons/ai';
 import DispatchContext from '../../DispatchContext';
+import StateContext from '../../StateContext';
 
 const ErrorMsg = 'Something went wrong';
 
 function WeatherCard({ currentLocation }) {
+  const { favoritesLocations } = useContext(StateContext);
   const dispatch = useContext(DispatchContext);
 
   const { data, isLoading, isError } = useFetch(
@@ -21,14 +23,18 @@ function WeatherCard({ currentLocation }) {
 
   const addToFavorites = async () => {
     dispatch({ type: 'ADD_FAV', payload: currentLocation });
-    const userFav = await fetch(`/api/favoritesLocations`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(currentLocation),
-    });
-    const userFaveDate = userFav.json();
-    console.log({ userFaveDate });
+    try {
+      await fetch(`/api/favoritesLocations`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(currentLocation),
+      });
+    } catch (e) {
+      console.log(e.message);
+    }
   };
+
+  const disableButton = favoritesLocations[currentLocation.value];
 
   return (
     <span style={{ marginRight: '400px' }}>
@@ -63,7 +69,7 @@ function WeatherCard({ currentLocation }) {
               </div>
             </div>
             <button
-              className='fav_btn'
+              className={_.isEmpty(disableButton) ? 'fav_btn' : 'buttonDisable'}
               onClick={addToFavorites}>
               Add to favories
               <AiFillHeart style={{ marginLeft: '3px', color: 'red' }} />

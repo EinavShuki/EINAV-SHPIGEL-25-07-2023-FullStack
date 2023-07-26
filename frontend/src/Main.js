@@ -12,15 +12,14 @@ const initialState = {
 const reducer = (state = {}, action) => {
   switch (action.type) {
     case 'SET':
-      return action.payload;
+      return { ...state, favoritesLocations: action.payload || {} };
     case 'ADD_FAV':
-      return {
-        ...state,
-        [action.payload.value]: action.payload.label,
-      };
+      console.log('changing the state');
+      state.favoritesLocations[action.payload.value] = action.payload.label;
+      return { ...state };
     case 'REMOVE_FAV':
-      delete state[action.payload.key];
-      return state;
+      delete state.favoritesLocations[action.payload.key];
+      return { ...state };
     default:
       return state;
   }

@@ -5,7 +5,7 @@ const cookieHandler = (req, res, next) => {
   const { userId } = req.cookies;
   if (!userId) {
     console.log('setting a cookie');
-    res.cookie('userId', uuidv4(), { maxAge: 900000, httpOnly: isProd });
+    res.cookie('userId', uuidv4(), { maxAge: 90000000, httpOnly: isProd });
     return res.json({});
   }
   next();

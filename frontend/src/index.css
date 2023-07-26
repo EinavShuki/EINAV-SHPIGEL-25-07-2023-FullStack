@@ -37,3 +37,8 @@ button:hover {
   margin-top: 60px;
   display: flex;
 }
+.buttonDisable,
+.buttonDisable:hover {
+  background-color: rgb(126, 126, 126);
+  transform: scale(1);
+}
