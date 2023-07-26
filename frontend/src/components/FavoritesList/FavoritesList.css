@@ -1,0 +1,12 @@
+.fav_list {
+  width: 400px;
+  position: absolute;
+  right: 30px;
+  height: 500px;
+
+  border-left: solid 1px hsla(0, 0%, 40%, 0.328);
+  background-color: #8080800a;
+  box-shadow: 0 0 8px 8px white inset;
+  padding: 15px;
+  text-align: center;
+}

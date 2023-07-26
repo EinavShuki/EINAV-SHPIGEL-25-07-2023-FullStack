@@ -1,9 +1,8 @@
 .weather_area {
-  margin-top: 60px;
-  display: flex;
+  display: inline-flex;
   background-color: #8080800a;
   box-shadow: 0 0 8px 8px white inset;
-  padding: 15px;
+  padding: 50px;
 }
 .weather_top_line {
   display: flex;
