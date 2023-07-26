@@ -11,9 +11,6 @@ const Search = ({ currentLocation, setCurrentLocation }) => {
   const [inputValue, setInputValue] = useState('');
   const [options, setOptions] = useState([]);
   const debouncedValue = useDebounce(inputValue, DELAY); //costume hook
-
-  console.log({ currentLocation });
-
   const changeLocation = (e) => {
     setCurrentLocation(e);
   };
