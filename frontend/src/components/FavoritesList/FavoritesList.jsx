@@ -3,16 +3,8 @@ import './FavoritesList.css';
 import StateContext from '../../StateContext';
 import _ from 'lodash';
 
-const FavoritesList = ({ buttonDisable = false, setCurrentLocation }) => {
+const FavoritesList = ({ buttonDisable = false, onClick }) => {
   const { favoritesLocations } = useContext(StateContext);
-
-  useEffect(() => {
-    console.log({ favoritesLocations });
-  }, [favoritesLocations]);
-
-  const onClick = (data) => {
-    setCurrentLocation(data);
-  };
 
   return (
     <div className='fav_list'>

@@ -4,6 +4,7 @@ import HomeScreen from './screens/HomeScreen';
 import useFetch from './hooks/useFetch';
 import StateContext from './StateContext';
 import DispatchContext from './DispatchContext';
+import FavoritesScreen from './screens/FavoritesScreen';
 
 const initialState = {
   favoritesLocations: {},
@@ -46,6 +47,10 @@ const Main = () => {
               path='/'
               element={<HomeScreen />}
               exact
+            />
+            <Route
+              path='/favorites'
+              element={<FavoritesScreen />}
             />
           </Routes>
         </Router>

@@ -42,3 +42,22 @@ button:hover {
   background-color: rgb(126, 126, 126);
   transform: scale(1);
 }
+.fav_manage_btn {
+  height: fit-content;
+  margin-right: 10px;
+}
+.back_btn {
+  height: fit-content;
+  margin-right: 100px;
+}
+.fav_title {
+  align-self: center;
+  padding-right: 400px;
+}
+.fav_title > h1 {
+  margin-bottom: 0;
+}
+
+.fav_screen {
+  padding-top: 20px;
+}
