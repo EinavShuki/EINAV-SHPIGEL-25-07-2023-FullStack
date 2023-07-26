@@ -1,6 +1,6 @@
 import axios from 'axios';
 import locations from '../mocks/getLocations.js';
-const getLocations = async (req, res, next) => {
+const getLocations = async (req, res) => {
   try {
     const { query = '' } = req.params;
 
@@ -11,7 +11,6 @@ const getLocations = async (req, res, next) => {
     res.json(data);
   } catch (err) {
     res.status(404);
-    return next(err);
   }
 };
 

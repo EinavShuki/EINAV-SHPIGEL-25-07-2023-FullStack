@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './WeatherCard.css';
 import _ from 'lodash';
 import useFetch from '../../hooks/useFetch';
 import Loader from '../Loader/Loader';
 import ErrorCard from '../ErrorCard/ErrorCard';
 import { AiFillHeart } from 'react-icons/ai';
+import DispatchContext from '../../DispatchContext';
 
 const ErrorMsg = 'Something went wrong';
 
 function WeatherCard({ currentLocation }) {
-  console.log({ currentLocation });
+  const dispatch = useContext(DispatchContext);
 
   const { data, isLoading, isError } = useFetch(
     `/api/cityWeather/${currentLocation.value}`
@@ -18,7 +19,16 @@ function WeatherCard({ currentLocation }) {
     data && new Date(data.LocalObservationDateTime).toDateString();
   const currentTemp = _.get(data, 'Temperature.Metric.Value', '');
 
-  const addToFavorites = () => {};
+  const addToFavorites = async () => {
+    dispatch({ type: 'ADD_FAV', payload: currentLocation });
+    const userFav = await fetch(`/api/favoritesLocations`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(currentLocation),
+    });
+    const userFaveDate = userFav.json();
+    console.log({ userFaveDate });
+  };
 
   return (
     <span style={{ marginRight: '400px' }}>

@@ -1,8 +1,9 @@
-import React, { createContext, useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen';
 import useFetch from './hooks/useFetch';
-import _ from 'lodash';
+import StateContext from './StateContext';
+import DispatchContext from './DispatchContext';
 
 const initialState = {
   favoritesLocations: {},
@@ -15,7 +16,7 @@ const reducer = (state = {}, action) => {
     case 'ADD_FAV':
       return {
         ...state,
-        [action.payload.key]: action.payload.value,
+        [action.payload.value]: action.payload.label,
       };
     case 'REMOVE_FAV':
       delete state[action.payload.key];
@@ -26,15 +27,16 @@ const reducer = (state = {}, action) => {
 };
 
 const Main = () => {
-  const StateContext = createContext();
-  const DispatchContext = createContext();
-
-  const { data: fafArray } = useFetch(`/api/favoritesLocations`);
+  const { data } = useFetch(`/api/favoritesLocations`); //haveto be done to set cookie in server
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  useFetch(() => {
-    fafArray && dispatch({ type: 'SET', payload: fafArray });
-  }, [fafArray]);
+  useEffect(() => {
+    data && dispatch({ type: 'SET', payload: data.favoritesLocations });
+  }, [data]);
+
+  useEffect(() => {
+    console.log({ state });
+  }, [state]);
 
   return (
     <StateContext.Provider value={state}>

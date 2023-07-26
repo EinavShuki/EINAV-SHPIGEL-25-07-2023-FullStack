@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import CityWeather from './models/cityWeatherModel.js';
+import UsersFavorites from './models/usersFavoritesModel.js';
 import weather from './mocks/getWeather.js';
 import connectDB from './config/db.js';
 
@@ -9,7 +9,7 @@ connectDB();
 
 const importData = async () => {
   try {
-    await CityWeather.insertMany(weather);
+    await UsersFavorites.deleteMany();
     console.log('Data imported!');
     process.exit();
   } catch (error) {
