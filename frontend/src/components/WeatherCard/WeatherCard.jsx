@@ -49,13 +49,13 @@ function WeatherCard({ currentLocation, disableButton, favActionBtn }) {
             <div className='weather_area'>
               <div>
                 <div className='weather_top_line'>
-                  <h3
+                  <h4
                     style={{
                       borderBottom: 'solid 1px  hsl(0, 0%, 40%)',
                       paddingBottom: '5px',
                     }}>
-                    Current Weather
-                  </h3>
+                    Current Weather in {currentLocation?.label}
+                  </h4>
                   <h5 className='date'>{formattedDate}</h5>
                 </div>
                 <div className='weather_mid_line'>

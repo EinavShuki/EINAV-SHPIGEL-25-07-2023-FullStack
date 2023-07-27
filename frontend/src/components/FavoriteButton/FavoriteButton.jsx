@@ -4,7 +4,6 @@ import { AiFillHeart } from 'react-icons/ai';
 
 const FavoriteButton = ({ action, disableButton, onClick }) => {
   console.log(disableButton);
-  console.log('_.isEmpty(disableButton)', _.isEmpty(disableButton));
   return (
     <button
       disabled={disableButton}

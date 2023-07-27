@@ -40,7 +40,6 @@ const FavoritesScreen = () => {
           <h1>Favorites </h1>
         </span>
       </div>
-
       <div className='main_display'>
         {!_.isEmpty(currentLocation) && (
           <WeatherCard
@@ -50,7 +49,7 @@ const FavoritesScreen = () => {
           />
         )}
         <FavoritesList
-          buttonDisable={!disableButton}
+          buttonDisable={favoritesLocations[currentLocation?.value]}
           onClick={onFavClick}
         />
       </div>

@@ -2,12 +2,13 @@
   display: inline-flex;
   background-color: #8080800a;
   box-shadow: 0 0 8px 8px white inset;
-  padding: 50px;
+  padding: 30px;
+}
+h4,
+h5 {
+  margin: 0;
 }
 .weather_top_line {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   width: 300px;
 }
 .weather_mid_line {

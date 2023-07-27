@@ -14,11 +14,15 @@ const FavoritesList = ({ buttonDisable = false, onClick }) => {
           return (
             <li key={index}>
               <button
-                disabled={buttonDisable}
+                disabled={buttonDisable === favoritesLocations[key]}
                 onClick={() =>
                   onClick({ value: key, label: favoritesLocations[key] })
                 }
-                className={buttonDisable ? 'buttonDisable' : 'list_btn'}>
+                className={
+                  buttonDisable === favoritesLocations[key]
+                    ? 'buttonDisable'
+                    : 'list_btn'
+                }>
                 {favoritesLocations[key]}
               </button>
             </li>
