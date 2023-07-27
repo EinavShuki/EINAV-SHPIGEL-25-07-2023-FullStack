@@ -19,7 +19,6 @@ const FavoritesScreen = () => {
   };
 
   const disableButton = !favoritesLocations[currentLocation?.value];
-  console.log({ disableButton });
 
   return (
     <div

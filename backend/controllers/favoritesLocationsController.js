@@ -37,4 +37,22 @@ const addFavoritesLocation = async (req, res, next) => {
   }
 };
 
-export { getFavoritesLocations, addFavoritesLocation };
+const deleteFavoritesLocations = async (req, res, next) => {
+  const { userId } = req.cookies;
+  const { value, label } = req.body;
+  try {
+    const userFav = await UsersFavorites.findOne({ userId });
+    userFav.favoritesLocations.delete(value);
+    await userFav.save();
+    res.json({ message: `${label} removed from favorites` });
+  } catch (err) {
+    res.status(404);
+    return next(err);
+  }
+};
+
+export {
+  getFavoritesLocations,
+  addFavoritesLocation,
+  deleteFavoritesLocations,
+};

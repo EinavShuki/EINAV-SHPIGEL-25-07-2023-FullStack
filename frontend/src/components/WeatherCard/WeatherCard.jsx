@@ -33,8 +33,16 @@ function WeatherCard({ currentLocation, disableButton, favActionBtn }) {
     }
   };
   const removeFromFavorites = async () => {
-    console.log('currentLocation  was removed from favorites');
     dispatch({ type: 'REMOVE_FAV', payload: currentLocation });
+    try {
+      await fetch(`/api/favoritesLocations`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(currentLocation),
+      });
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   return (
