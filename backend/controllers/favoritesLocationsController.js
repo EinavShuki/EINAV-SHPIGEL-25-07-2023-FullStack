@@ -1,4 +1,5 @@
 import UsersFavorites from '../models/usersFavoritesModel.js';
+import _ from 'lodash';
 
 const getFavoritesLocations = async (req, res, next) => {
   const { userId } = req.cookies;
@@ -25,7 +26,7 @@ const addFavoritesLocation = async (req, res, next) => {
       });
       res.status(201).json(newUserFav);
     } else {
-      userFav.favoritesLocations[value] = label;
+      userFav.favoritesLocations.set(value, label);
       // add the favorite location to the user
       newUserFav = await userFav.save();
       res.json(newUserFav);
