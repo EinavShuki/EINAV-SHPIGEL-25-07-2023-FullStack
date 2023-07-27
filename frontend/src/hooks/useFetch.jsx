@@ -1,18 +1,15 @@
 import { useState, useEffect } from 'react';
 
-const useFetch = (url, options = {}) => {
+const useFetch = (url) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  // useEffect(() => {
-  //   console.log({ options });
-  // }, [options]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsError(false);
-        const response = await fetch(url, options);
+        const response = await fetch(url);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

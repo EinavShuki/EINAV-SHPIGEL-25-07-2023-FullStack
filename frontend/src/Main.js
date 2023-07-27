@@ -18,7 +18,6 @@ const reducer = (state = {}, action) => {
     case 'SET':
       return { ...state, favoritesLocations: action.payload || {} };
     case 'ADD_FAV':
-      console.log('changing the state');
       state.favoritesLocations[action.payload.value] = action.payload.label;
       return { ...state };
     case 'REMOVE_FAV':
@@ -36,10 +35,6 @@ const Main = () => {
   useEffect(() => {
     data && dispatch({ type: 'SET', payload: data.favoritesLocations });
   }, [data]);
-
-  useEffect(() => {
-    console.log({ state });
-  }, [state]);
 
   return (
     <StateContext.Provider value={state}>

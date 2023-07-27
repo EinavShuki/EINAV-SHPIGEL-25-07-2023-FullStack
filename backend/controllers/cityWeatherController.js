@@ -18,8 +18,8 @@ const getCityWeather = async (req, res, next) => {
     const now = new Date().toLocaleDateString('en-GB');
 
     if (!city) {
-      // const { data } = await fetchingCityWeather(cityKey);
-      const data = weather;
+      const { data } = await fetchingCityWeather(cityKey);
+      // const data = weather;
       const newCity = await CityWeather.create({
         ...data[0],
         cityKey,
@@ -31,10 +31,9 @@ const getCityWeather = async (req, res, next) => {
       ).toLocaleDateString('en-GB');
 
       if (now !== cityDate) {
-        // const data = await fetchingCityWeather(cityKey);
-        const data = weather;
+        const data = await fetchingCityWeather(cityKey);
+        // const data = weather;
         const newCity = await _.merge(city, data[0]).save();
-        console.log({ newCity });
         res.json(newCity);
       } else {
         console.log('fetching from db');
