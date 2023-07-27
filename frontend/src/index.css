@@ -12,13 +12,6 @@ code {
     monospace;
 }
 
-.home_div {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 button {
   display: inline-flex;
   align-items: center;
@@ -58,6 +51,11 @@ button:hover {
   margin-bottom: 0;
 }
 
-.fav_screen {
+.screen {
+  width: 100vw;
+  height: 100vh;
   padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

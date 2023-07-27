@@ -1,15 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import FavoritesList from '../components/FavoritesList/FavoritesList';
+import StateContext from '../StateContext';
 import { useNavigate } from 'react-router-dom';
+import DispatchContext from '../DispatchContext';
+import _ from 'lodash';
+import WeatherCard from '../components/WeatherCard/WeatherCard';
 
 const FavoritesScreen = () => {
+  const { favoritesLocations, currentLocation } = useContext(StateContext);
+  const dispatch = useContext(DispatchContext);
   const navigate = useNavigate();
 
   const navigateToHome = () => {
     navigate('/');
   };
+  const onFavClick = (data) => {
+    dispatch({ type: 'SET_CURRENT', payload: data });
+  };
+
+  const disableButton = !favoritesLocations[currentLocation?.value];
+  console.log({ disableButton });
+
   return (
-    <div className='fav_screen'>
+    <div
+      className='screen'
+      style={{ marginTop: '20px' }}>
       <div
         style={{
           display: 'flex',
@@ -27,7 +42,17 @@ const FavoritesScreen = () => {
       </div>
 
       <div className='main_display'>
-        <FavoritesList />
+        {!_.isEmpty(currentLocation) && (
+          <WeatherCard
+            currentLocation={currentLocation}
+            disableButton={disableButton}
+            favActionBtn={'Remove'}
+          />
+        )}
+        <FavoritesList
+          buttonDisable={!disableButton}
+          onClick={onFavClick}
+        />
       </div>
     </div>
   );

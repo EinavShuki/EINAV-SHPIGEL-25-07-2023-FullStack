@@ -13,3 +13,15 @@ export const getOptions = (valuesArray) => {
     []
   );
 };
+
+export const fetchLocations = async (debouncedValue, callback) => {
+  if (_.size(debouncedValue) > 1) {
+    const response = await fetch(`/api/locations/${debouncedValue}`);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const jsonData = await response.json();
+    return callback(jsonData);
+  }
+};

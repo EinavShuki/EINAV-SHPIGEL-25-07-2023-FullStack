@@ -4,14 +4,13 @@ import _ from 'lodash';
 import useFetch from '../../hooks/useFetch';
 import Loader from '../Loader/Loader';
 import ErrorCard from '../ErrorCard/ErrorCard';
-import { AiFillHeart } from 'react-icons/ai';
 import DispatchContext from '../../DispatchContext';
-import StateContext from '../../StateContext';
+import FavoriteButton from '../FavoriteButton/FavoriteButton';
 
 const ErrorMsg = 'Something went wrong';
 
-function WeatherCard({ currentLocation }) {
-  const { favoritesLocations } = useContext(StateContext);
+function WeatherCard({ currentLocation, disableButton, favActionBtn }) {
+  console.log({ favActionBtn });
   const dispatch = useContext(DispatchContext);
 
   const { data, isLoading, isError } = useFetch(
@@ -33,8 +32,10 @@ function WeatherCard({ currentLocation }) {
       console.log(e.message);
     }
   };
-
-  const disableButton = favoritesLocations[currentLocation.value];
+  const removeFromFavorites = async () => {
+    console.log('currentLocation  was removed from favorites');
+    dispatch({ type: 'REMOVE_FAV', payload: currentLocation });
+  };
 
   return (
     <span style={{ marginRight: '400px' }}>
@@ -68,12 +69,13 @@ function WeatherCard({ currentLocation }) {
                 <div className='temp'>{currentTemp}&deg;</div>
               </div>
             </div>
-            <button
-              className={_.isEmpty(disableButton) ? 'fav_btn' : 'buttonDisable'}
-              onClick={addToFavorites}>
-              Add to favories
-              <AiFillHeart style={{ marginLeft: '3px', color: 'red' }} />
-            </button>
+            <FavoriteButton
+              onClick={
+                favActionBtn === 'Add' ? addToFavorites : removeFromFavorites
+              }
+              disableButton={disableButton}
+              action={favActionBtn}
+            />
           </>
         )
       )}

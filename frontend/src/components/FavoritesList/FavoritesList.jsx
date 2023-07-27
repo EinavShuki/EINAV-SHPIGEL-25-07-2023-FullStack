@@ -10,9 +10,9 @@ const FavoritesList = ({ buttonDisable = false, onClick }) => {
     <div className='fav_list'>
       <h3>Favorites Locations</h3>
       <ul>
-        {_.map(_.keys(favoritesLocations), (key) => {
+        {_.map(_.keys(favoritesLocations), (key, index) => {
           return (
-            <li>
+            <li key={index}>
               <button
                 disabled={buttonDisable}
                 onClick={() =>

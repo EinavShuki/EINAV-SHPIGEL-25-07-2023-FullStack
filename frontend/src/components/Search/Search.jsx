@@ -3,33 +3,21 @@ import useDebounce from '../../hooks/useDebounce';
 import './Search.css';
 import Select from 'react-select';
 import _ from 'lodash';
-import { getOptions } from '../../utils';
+import { getOptions, fetchLocations } from '../../utils';
 
 const DELAY = 1000;
 
-const Search = ({ currentLocation, setCurrentLocation }) => {
+const Search = ({ currentLocation, onClick }) => {
   const [inputValue, setInputValue] = useState('');
   const [options, setOptions] = useState([]);
   const debouncedValue = useDebounce(inputValue, DELAY); //costume hook
-  const changeLocation = (e) => {
-    setCurrentLocation(e);
-  };
 
   useEffect(() => {
     //fetching locations
-    fetchLocations(debouncedValue);
-  }, [debouncedValue]);
-
-  const fetchLocations = async (debouncedValue) => {
-    if (_.size(debouncedValue) > 1) {
-      const response = await fetch(`/api/locations/${debouncedValue}`);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const jsonData = await response.json();
+    fetchLocations(debouncedValue, (jsonData) => {
       setOptions(getOptions(jsonData));
-    }
-  };
+    });
+  }, [debouncedValue]);
 
   return (
     <Select
@@ -38,7 +26,7 @@ const Search = ({ currentLocation, setCurrentLocation }) => {
       name='cities'
       className='basic-select'
       classNamePrefix='select'
-      onChange={changeLocation}
+      onChange={onClick}
       options={options}
       placeholder='Start typing location name'
       onInputChange={(input) => setInputValue(input)}

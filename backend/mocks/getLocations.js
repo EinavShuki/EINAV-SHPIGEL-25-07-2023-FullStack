@@ -16,6 +16,51 @@ const locations = [
   },
   {
     Version: 1,
+    Key: '59411',
+    Type: 'City',
+    Rank: 13,
+    LocalizedName: 'Loudi',
+    Country: {
+      ID: 'CN',
+      LocalizedName: 'China',
+    },
+    AdministrativeArea: {
+      ID: 'HN',
+      LocalizedName: 'Hunan',
+    },
+  },
+  {
+    Version: 1,
+    Key: '347625',
+    Type: 'City',
+    Rank: 15,
+    LocalizedName: 'Los Angeles',
+    Country: {
+      ID: 'US',
+      LocalizedName: 'United States',
+    },
+    AdministrativeArea: {
+      ID: 'CA',
+      LocalizedName: 'California',
+    },
+  },
+  {
+    Version: 1,
+    Key: '319242',
+    Type: 'City',
+    Rank: 20,
+    LocalizedName: 'Lome',
+    Country: {
+      ID: 'TG',
+      LocalizedName: 'Togo',
+    },
+    AdministrativeArea: {
+      ID: 'M',
+      LocalizedName: 'Maritime',
+    },
+  },
+  {
+    Version: 1,
     Key: '57911',
     Type: 'City',
     Rank: 23,
@@ -102,51 +147,6 @@ const locations = [
     AdministrativeArea: {
       ID: 'YN',
       LocalizedName: 'Yunnan',
-    },
-  },
-  {
-    Version: 1,
-    Key: '58368',
-    Type: 'City',
-    Rank: 33,
-    LocalizedName: "Long'an County",
-    Country: {
-      ID: 'CN',
-      LocalizedName: 'China',
-    },
-    AdministrativeArea: {
-      ID: 'GX',
-      LocalizedName: 'Guangxi',
-    },
-  },
-  {
-    Version: 1,
-    Key: '58726',
-    Type: 'City',
-    Rank: 33,
-    LocalizedName: 'Longhua County',
-    Country: {
-      ID: 'CN',
-      LocalizedName: 'China',
-    },
-    AdministrativeArea: {
-      ID: 'HE',
-      LocalizedName: 'Hebei',
-    },
-  },
-  {
-    Version: 1,
-    Key: '61050',
-    Type: 'City',
-    Rank: 33,
-    LocalizedName: 'Longchang',
-    Country: {
-      ID: 'CN',
-      LocalizedName: 'China',
-    },
-    AdministrativeArea: {
-      ID: 'SC',
-      LocalizedName: 'Sichuan',
     },
   },
 ];

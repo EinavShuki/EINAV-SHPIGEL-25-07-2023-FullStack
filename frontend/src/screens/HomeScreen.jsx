@@ -1,28 +1,31 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import Search from '../components/Search/Search';
 import WeatherCard from '../components/WeatherCard/WeatherCard';
 import _ from 'lodash';
 import FavoritesList from '../components/FavoritesList/FavoritesList';
 import StateContext from '../StateContext';
 import { useNavigate } from 'react-router-dom';
+import DispatchContext from '../DispatchContext';
 
 function HomeScreen() {
-  const [currentLocation, setCurrentLocation] = useState('');
-  const { favoritesLocations } = useContext(StateContext);
+  const { favoritesLocations, currentLocation } = useContext(StateContext);
+  const dispatch = useContext(DispatchContext);
+  console.log({ currentLocation });
+
   const navigate = useNavigate();
 
-  const disableButton = favoritesLocations[currentLocation.value];
+  const disableButton = favoritesLocations[currentLocation?.value];
 
   const navigateToFav = () => {
     navigate('/favorites');
   };
 
-  const onFavClick = (data) => {
-    setCurrentLocation(data);
+  const onLocationClicked = (data) => {
+    dispatch({ type: 'SET_CURRENT', payload: data });
   };
 
   return (
-    <div className='home_div'>
+    <div className='screen'>
       <div style={{ display: 'flex', alignItems: 'flex-end' }}>
         <button
           onClick={navigateToFav}
@@ -31,16 +34,20 @@ function HomeScreen() {
         </button>
         <Search
           currentLocation={currentLocation}
-          setCurrentLocation={setCurrentLocation}
+          onClick={onLocationClicked}
         />
       </div>
       <div className='main_display'>
         {!_.isEmpty(currentLocation) && (
-          <WeatherCard currentLocation={currentLocation} />
+          <WeatherCard
+            currentLocation={currentLocation}
+            disableButton={disableButton}
+            favActionBtn={'Add'}
+          />
         )}
         <FavoritesList
           buttonDisable={disableButton}
-          onClick={onFavClick}
+          onClick={onLocationClicked}
         />
       </div>
     </div>

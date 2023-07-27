@@ -8,10 +8,13 @@ import FavoritesScreen from './screens/FavoritesScreen';
 
 const initialState = {
   favoritesLocations: {},
+  currentLocation: '',
 };
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
+    case 'SET_CURRENT':
+      return { ...state, currentLocation: action.payload || '' };
     case 'SET':
       return { ...state, favoritesLocations: action.payload || {} };
     case 'ADD_FAV':
@@ -19,7 +22,7 @@ const reducer = (state = {}, action) => {
       state.favoritesLocations[action.payload.value] = action.payload.label;
       return { ...state };
     case 'REMOVE_FAV':
-      delete state.favoritesLocations[action.payload.key];
+      delete state.favoritesLocations[action.payload.value];
       return { ...state };
     default:
       return state;
