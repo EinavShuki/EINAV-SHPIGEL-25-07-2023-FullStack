@@ -10,7 +10,6 @@ import DispatchContext from '../DispatchContext';
 function HomeScreen() {
   const { favoritesLocations, currentLocation } = useContext(StateContext);
   const dispatch = useContext(DispatchContext);
-  console.log({ currentLocation });
 
   const navigate = useNavigate();
 

@@ -3,7 +3,6 @@ import _ from 'lodash';
 import { AiFillHeart } from 'react-icons/ai';
 
 const FavoriteButton = ({ action, disableButton, onClick }) => {
-  console.log(disableButton);
   return (
     <button
       disabled={disableButton}

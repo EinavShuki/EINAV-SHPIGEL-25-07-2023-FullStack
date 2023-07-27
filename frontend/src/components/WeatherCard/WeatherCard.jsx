@@ -10,7 +10,6 @@ import FavoriteButton from '../FavoriteButton/FavoriteButton';
 const ErrorMsg = 'Something went wrong';
 
 function WeatherCard({ currentLocation, disableButton, favActionBtn }) {
-  console.log({ favActionBtn });
   const dispatch = useContext(DispatchContext);
 
   const { data, isLoading, isError } = useFetch(
